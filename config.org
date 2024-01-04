@@ -1,0 +1,33 @@
+#+title Isaiah's GNU Emacs configuration
+#+startup: fold
+* Config
+** Disable vanilla crap
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+END_SRC
+
+#+RESULTS:
+
+** Install and configure packages
+*** Package + MELPA
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (package-initialize)
+#+END_SRC
+
+#+RESULTS:
+
+*** Evil
+#+BEGIN_SRC emacs-lisp
+  ;;install evil and 
+  (require 'evil)
+  (evil-mode 1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+** Set up theme
