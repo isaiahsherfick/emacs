@@ -1,7 +1,7 @@
 #+title Isaiah's GNU Emacs configuration
-#+startup: fold
 * Config
-** Disable vanilla crap
+#+startup: fold
+** Disable GUI crap
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -12,22 +12,50 @@
 
 ** Install and configure packages
 *** Package + MELPA
+**** Require package and add MELPA to package archives
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   (package-initialize)
+  (unless package-archive-contents
+  (package-refresh-contrents))
+#+END_SRC
+*** Use-package
+**** Bootstrap use-package
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t)
 #+END_SRC
 
 #+RESULTS:
+: use-package
 
 *** Evil
+**** Enable Evil mode
 #+BEGIN_SRC emacs-lisp
-  ;;install evil and 
   (require 'evil)
   (evil-mode 1)
 #+END_SRC
+**** Install org-evil to make it play nice with org-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package dash)
+  (require 'dash)
+#+END_SRC
 
 #+RESULTS:
-: t
+: org-evil
 
+** line numbers and word truncation
+*** Enable relative line numbers everywhere (:set rnu && :set nu)
+#+BEGIN_SRC emacs-lisp
+  (global-display-line-numbers-mode)
+  (setq display-line-numbers-type 'relative)
+#+END_SRC
+
+#+RESULTS:
+: relative
+
+*** Disable truncate-words by default (:set nowrap)
 ** Set up theme
